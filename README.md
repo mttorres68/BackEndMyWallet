@@ -31,7 +31,7 @@
 # Como rodar o projeto ✅
 ### Para baixar o projeto, clone-o diretamente do git executando o seguinte comando
 ```
-git clone https://github.com/mttorres68/backend.git 
+https://github.com/mttorres68/BackEndMyWallet.git
 ```
 
 ### Instale as dependências 
