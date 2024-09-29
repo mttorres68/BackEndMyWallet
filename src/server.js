@@ -5,6 +5,7 @@ import { createUser, getUser } from "./routers/user.js";
 import { login } from "./routers/login.js";
 import { validateToken } from "./routers/token.js";
 import { connectDB } from "./db/connection.js";
+import { nfce } from "./routers/nfce.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use("/user", createUser);
 app.use("/login", login);
 app.use("/user", getUser);
 app.use("/token", validateToken);
+app.use("/nfce", nfce);
 
 
 app.listen(process.env.PORT, async () => {
