@@ -31,3 +31,6 @@ src/db/compose.yml
 
 .env
 .env.local
+
+# Ambiente de testes
+src/lib/scrapingNFE/test.js
