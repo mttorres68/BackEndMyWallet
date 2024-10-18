@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// USUÁRIO
+model User {
+  uid         String       @id @default(cuid()) // ID INT para SERIAL  CUID
+  firstName   String
+  lastName    String
+  email       String    @unique
+  phoneNumber String?
+  password    String
+  role        Role      @default(ADMIN)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  expenses    Expense[]
+}
+
+// DESPESA
+model Expense {
+  expenseId   Int      @id @default(autoincrement())
+  amount      Float
+  description String?
+  date        DateTime @default(now())
+
+  userUid    String
+  categoryId Int
+
+  user     User     @relation(fields: [userUid], references: [uid])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  purchases Purchase[]
+  accounts  Account[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+// COMPRA 
+model Purchase {
+  purchaseId    Int      @id @default(autoincrement())
+  enterprise    String
+  cnpj          String?
+  address       String
+  products      Json     @db.JsonB // SALVAR DADOS EM FORMATO JSON
+  totalItems    Int
+  totalValue    Float
+  paymentMethod String
+  purchaseDate  DateTime
+
+  expenseId Int
+  expenses  Expense @relation(fields: [expenseId], references: [expenseId])
+}
+
+// CATEGORIA
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  expenses    Expense[]
+}
+
+// CONTA
+model Account {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  dueDate             DateTime
+  purchaseDate        DateTime
+  isRecurring         Boolean
+  description         String?
+  installmentPurchase Json     @db.JsonB // SALVAR DADOS EM FORMATO JSON
+  totalInstallments   Int
+
+  expenseId Int
+  category  Expense @relation(fields: [expenseId], references: [expenseId])
+}
+
+// RENDA
+model Income {
+  incomeId    Int      @id @default(autoincrement())
+  incomeName  String
+  description String?
+  aumount     Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
