@@ -5,19 +5,28 @@ import cors from "cors";
 import routes from "./App/routers/index";
 import prisma from "./prisma/prisma";
 import { errorMiddleware } from "./middleware/exceptionsMiddleware";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// MIDDLEWARES DE USO GERAL
 app.use(express.json());
+app.use(cookieParser())
 app.use(cors());
+
+// ROTAS
 app.use(routes);
 
+
+// MIDDLEWARE DE ERRO
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   errorMiddleware(error, req, res, next);
 });
 
+
+// INICIALIZAÇÃO DO SERVIDOR
 app.listen(PORT, async () => {
   console.log(`Servidor inicializado... porta:${PORT}`);
 
