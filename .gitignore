@@ -34,3 +34,6 @@ src/db/compose.yml
 
 # Ambiente de testes
 src/lib/scrapingNFE/test.js
+
+# Jest
+coverage
