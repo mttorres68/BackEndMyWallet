@@ -1,0 +1,3 @@
+{
+  "*.ts": ["npx run eslint 'src/**' --fix", "prettier --write"]
+}
