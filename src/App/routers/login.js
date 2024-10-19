@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyUser } from "../query.js";
+import { verifyUser } from "../../query.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
