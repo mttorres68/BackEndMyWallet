@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 /* 
-import { findAllUsers } from "../useCases/Users/findAll";
 import { deleteUsers } from "../useCases/Users/delete";
 */
+import { findAllUser } from "../useCases/Users/findAll";
 import { updateUser } from "../useCases/Users/update";
 import { createUser } from "../useCases/Users/create";
+import { CustomRequest } from "../../middleware/verifyJWT";
 
 interface User {
   firstName: string;
@@ -50,24 +51,40 @@ class UserController {
     return;
   }
 
-  async update(request: Request, response: Response){
-    const { id } = request.params;
+  async update(request: CustomRequest, response: Response) {
+    const id = request.user?.uid;
+    console.log(id);
 
-    const { firstName, lastName, phoneNumber, email } = request.body as User;
+    if (request.user?.uid !== id) {
+      console.log(request.user?.uid);
+
+      response
+        .status(403)
+        .json({ error: "You do not have permission to update this user" });
+      return;
+    }
+
+    const { firstName, lastName, email, phoneNumber } = request.body as User;
 
     // retornar apenas os dados atualizados
-    
-    const user = await updateUser(
-      id,
-      firstName,
-      lastName,
-      phoneNumber as string,
-      email
-    );
 
-    response.status(200).json(user);
+    if (id) {
+      const user = await updateUser(
+        id,
+        firstName,
+        lastName,
+        email,
+        phoneNumber as string
+      );
 
+      response.status(200).json(user);
+    }
+  }
 
+  async getAll(request: Request, response: Response): Promise<void> {
+    const users = await findAllUser();
+
+    response.status(200).json(users);
   }
 }
 

@@ -12,7 +12,7 @@ model User {
   uid         String       @id @default(cuid()) // ID INT para SERIAL  CUID
   firstName   String
   lastName    String
-  email       String    @unique
+  email       String    @unique // EMAIL ÚNICO TERAR QUE SER ALTERADO PARA O USUARIO CASO QUERIA ATUALIZAR O EMAIL
   phoneNumber String?
   password    String
   role        Role      @default(ADMIN)

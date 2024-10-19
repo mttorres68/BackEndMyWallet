@@ -3,11 +3,20 @@ import crypto from "node:crypto";
 import bcrypt from "bcrypt";
 import prisma from "../../prisma/prisma";
 
-
 class UserRepository {
   async findAll() {
     try {
-      const allUsers = await prisma.user.findMany();
+      const allUsers = await prisma.user.findMany({select: {
+        uid: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        role: true,
+        phoneNumber: true,
+        createdAt: true,
+        updatedAt: true,
+        expenses: true,
+      }});
       return allUsers;
     } catch (err) {
       console.log(err);
@@ -45,14 +54,22 @@ class UserRepository {
     }
   }
 
-  async update(uid: string, data: Prisma.UserUpdateInput ) {
+  async update(uid: string, data: Prisma.UserUpdateInput) {
     try {
-      const {firstName, lastName, email, phoneNumber} = await prisma.user.update({
+      const { email, ...restOfData } = data;
+
+      const updateUser = await prisma.user.update({
         where: { uid },
-        data,
+        data: email ? { ...restOfData, email } : restOfData,
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+          phoneNumber: true,
+        },
       });
 
-      return {firstName, lastName, email, phoneNumber};
+      return  updateUser ;
     } catch (error) {
       console.log(error);
     }
