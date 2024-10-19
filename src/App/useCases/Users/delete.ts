@@ -1,13 +1,13 @@
-import UserRepository from "../../App/repositories/UserRepositories";
+import UserRepository from "@/App/repositories/userRepositories"
 
 export async function deleteSchedules(id: string) {
-  const existsSchedule = await UserRepository.findByID(id);
+  const existsSchedule = await UserRepository.findByID(id)
 
   if (!existsSchedule) {
-    throw new Error("Schedule does not exists");
+    throw new Error("Schedule does not exists")
   }
 
-  await UserRepository.delete(id);
+  await UserRepository.delete(id)
 
-  return;
+  return
 }
