@@ -1,5 +1,5 @@
-import { JWT_SECRET } from "@/utils/constants"
 import jwt from "jsonwebtoken"
+import { JWT_SECRET } from "../utils/constants"
 
 class GenerateAccessToken {
   execute(userId: string): string {

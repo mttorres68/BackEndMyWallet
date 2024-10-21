@@ -1,4 +1,4 @@
-import generateTokenProvides from "@/provider/generateTokenProvides"
+import generateTokenProvides from "../provider/generateTokenProvides"
 
 it("should sum", () => {
   const token = generateTokenProvides.execute("123")

@@ -1,4 +1,4 @@
-import UserRepository from "@/App/repositories/userRepositories"
+import UserRepository from "../../repositories/userRepositories"
 
 export async function deleteSchedules(id: string) {
   const existsSchedule = await UserRepository.findByID(id)
