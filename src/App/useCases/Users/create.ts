@@ -1,13 +1,16 @@
-import { User } from "@prisma/client";
-import UserRepository from "../../repositories/userRepositories";
-import { ConflictError, InternalServerError } from "../../../helpers/ApiExceptions";
+import { User } from "@prisma/client"
+import UserRepository from "../../repositories/userRepositories"
+import {
+  ConflictError,
+  InternalServerError
+} from "../../../helpers/ApiExceptions"
 
 interface UserProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber?: string;
-  password: string;
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber?: string
+  password: string
 }
 
 export async function createUser({
@@ -15,14 +18,14 @@ export async function createUser({
   lastName,
   email,
   phoneNumber,
-  password,
+  password
 }: UserProps): Promise<User> {
-  const existsEmail = await UserRepository.findByEmail(email);
-  
+  const existsEmail = await UserRepository.findByEmail(email)
+
   if (existsEmail?.email === email) {
     throw new ConflictError(
       "Unable to create user. Please verify your information and try again"
-    );
+    )
   }
 
   const newUser = await UserRepository.create({
@@ -30,12 +33,12 @@ export async function createUser({
     lastName,
     phoneNumber,
     email,
-    password,
-  });
+    password
+  })
 
   if (!newUser) {
-    throw new InternalServerError("Error creating user.");
+    throw new InternalServerError("Error creating user.")
   }
 
-  return newUser;
+  return newUser
 }
