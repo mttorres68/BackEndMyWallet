@@ -4,13 +4,18 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon --watch src -r tsconfig-paths/register src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "nodemon -r tsconfig-paths/register src/index.ts",
+    "build:alias": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "build": "npx tsc",
+    "start": "node dist/index.js",
     "format": "prettier --write .",
     "lint": "eslint . ",
     "lint:fix": "eslint . --fix ",
-    "prepare": "husky && husky install"
+    "prepare": "husky && husky install",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:staged": "jest --findRelatedTests",
+    "test:push": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +30,7 @@
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "node-html-parser": "^6.1.13",
     "pg": "^8.12.0",
     "selenium-webdriver": "^4.24.0"
@@ -36,6 +42,7 @@
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.7.4",
     "concurrently": "^9.0.1",
@@ -47,7 +54,9 @@
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "prisma": "^5.20.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.10.0"
   }

@@ -1,14 +1,14 @@
-import { verifyJWT } from "../../middleware/verifyJWT";
-import UserController from "../controllers/user.controllers";
-import { Router } from "express";
+import { verifyJWT } from "../../middleware/verifyJWT"
+import UserController from "../controllers/user.controllers"
+import { Router } from "express"
 
-const userRoutes = Router();
+const userRoutes = Router()
 
-userRoutes.post("/", UserController.create);
-userRoutes.get("/", verifyJWT, UserController.getAll);
-userRoutes.put("/:id", verifyJWT, UserController.update);
+userRoutes.post("/", UserController.create)
+userRoutes.get("/", verifyJWT, UserController.getAll)
+userRoutes.put("/:id", verifyJWT, UserController.update)
 
-export default userRoutes;
+export default userRoutes
 
 /**
  * @description Create User

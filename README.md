@@ -1,8 +1,9 @@
-# Back-End My Wallet 
-* Gerenciamento Financeiro
+# Back-End My Wallet
 
+- Gerenciamento Financeiro
 
 # Tecnologias Utilizadas
+
 <table>
   <tr>
     <td>NodeJs</td>
@@ -29,24 +30,27 @@
 </table>
 
 # Como rodar o projeto ✅
+
 ### Para baixar o projeto, clone-o diretamente do git executando o seguinte comando
+
 ```
 https://github.com/mttorres68/BackEndMyWallet.git
 ```
 
-### Instale as dependências 
+### Instale as dependências
+
 ```
 npm install
 ```
 
 #### Rodar o projeto utilizando nodemon
+
 ```
 npm run dev
 ```
 
 #### Rodar o projeto sem utilizar o nodemon
+
 ```
 npm run start
 ```
-
-

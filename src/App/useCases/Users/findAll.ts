@@ -1,7 +1,7 @@
-import UserRepository from "../../repositories/userRepositories";
+import UserRepository from "../../repositories/userRepositories"
 
 export async function findAllUser() {
-  const allUser = await UserRepository.findAll();
+  const allUser = await UserRepository.findAll()
 
-  return allUser;
+  return allUser
 }

@@ -1,13 +1,13 @@
-import eslintConfigPrettier from 'eslint-config-prettier'
-import globals from 'globals'
-import pluginJs from '@eslint/js'
-import tseslint from 'typescript-eslint'
+import eslintConfigPrettier from "eslint-config-prettier"
+import globals from "globals"
+import pluginJs from "@eslint/js"
+import tseslint from "typescript-eslint"
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
+  { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
-    files: ['**/*.ts'],
-    languageOptions: { globals: globals.node, sourceType: 'script' }
+    files: ["**/*.ts"],
+    languageOptions: { globals: globals.node, sourceType: "script" }
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
